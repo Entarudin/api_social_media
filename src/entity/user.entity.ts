@@ -2,7 +2,7 @@
  * @class User
  */
 
-import { Role } from './Role';
+import { Role } from './role.entity';
 
 export class User {
   private id: number;
