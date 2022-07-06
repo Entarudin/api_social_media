@@ -2,15 +2,20 @@
  * @class User
  */
 
+import { PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Role } from './role.entity';
 
 export class User {
+  @PrimaryGeneratedColumn()
   private id: number;
 
+  @Column()
   private login: string;
 
+  @Column()
   private password: string;
 
+  @Column()
   private roles: Role[];
 
   constructor(id: number, login: string, password: string, roles: Role[] = []) {

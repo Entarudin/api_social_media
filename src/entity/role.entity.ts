@@ -2,8 +2,14 @@
  * @class Role
  */
 
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
 export class Role {
+  @PrimaryGeneratedColumn()
   private id: number;
+
+  @Column()
   private value: string;
 
   constructor(id: number, value: string) {
