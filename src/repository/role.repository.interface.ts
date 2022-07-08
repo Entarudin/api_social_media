@@ -1,10 +1,15 @@
-import { ChangeRoleDto } from 'src/dto/change-role.dto';
-import { CreateRoleDto } from 'src/dto/create-role.dto';
-import { Role } from 'src/entity/role.entity';
+import { Role } from 'src/entity/Role/role.entity';
+
+/**
+ * @interface IRoleRepository
+ */
 
 export interface IRoleRepository {
-  save(dto: CreateRoleDto): Promise<void>;
-  find(value: string): Promise<Role>;
-  change(id: number, dto: ChangeRoleDto): Promise<Role>;
-  remove(id: number): Promise<void>;
+  save(role: Role): Promise<void>;
+  findByName(name: string): Promise<Role | undefined>;
+  findAll(): Promise<Role[]>;
+  findByIds(ids: number[]): Promise<Role[]>;
+  update(role: Role): Promise<void>;
+  removeById(id: number): Promise<void>;
+  getOneById(id: number): Promise<Role>;
 }

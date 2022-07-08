@@ -1,3 +1,3 @@
 export interface IFindUserOptions {
-  ids: number[];
+  ids?: number[];
 }
