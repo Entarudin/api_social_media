@@ -2,24 +2,18 @@
  * @class User
  */
 
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
-import { Role } from './role.entity';
+import { Role } from './Role/role.entity';
 
 export class User {
-  @PrimaryGeneratedColumn()
   private id: number;
 
-  @Column()
   private login: string;
 
-  @Column()
   private password: string;
 
-  @Column()
   private roles: Role[];
 
-  constructor(id: number, login: string, password: string, roles: Role[] = []) {
-    this.id = id;
+  constructor(login: string, password: string, roles: Role[] = []) {
     this.login = login;
     this.password = password;
     this.roles = roles;
@@ -49,7 +43,7 @@ export class User {
     this.roles.push(role);
   }
 
-  public deleteRole(roleValue: string): void {
-    this.roles = this.roles.filter((role) => role.getValue() !== roleValue);
+  public deleteRole(roleName: string): void {
+    this.roles = this.roles.filter((role) => role.getName() !== roleName);
   }
 }
