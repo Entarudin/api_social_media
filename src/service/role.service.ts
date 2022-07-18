@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ChangeRoleDto } from 'src/dto/change-role.dto';
 import { CreateRoleDto } from 'src/dto/create-role.dto';
 import { Role } from 'src/entity/Role/role.entity';
@@ -7,7 +7,10 @@ import { IRoleService } from './role.service.interface';
 
 @Injectable()
 export class RoleService implements IRoleService {
-  constructor(private readonly roleRepository: IRoleRepository) {}
+  constructor(
+    @Inject('IRoleRepository')
+    private readonly roleRepository: IRoleRepository,
+  ) {}
 
   public async fetch(): Promise<Role[]> {
     return await this.roleRepository.findAll();
@@ -27,6 +30,7 @@ export class RoleService implements IRoleService {
 
   public async create(dto: CreateRoleDto): Promise<Role> {
     const role = new Role(dto.name, dto.description);
+    console.log(role);
     await this.roleRepository.save(role);
     return role;
   }
@@ -38,8 +42,8 @@ export class RoleService implements IRoleService {
 
   public async edit(id: number, dto: ChangeRoleDto): Promise<Role> {
     const role = await this.roleRepository.getOneById(id);
-    if (dto.desription) {
-      role.changeDescription(dto.desription);
+    if (dto.description) {
+      role.changeDescription(dto.description);
     }
     if (dto.name) {
       role.rename(dto.name);

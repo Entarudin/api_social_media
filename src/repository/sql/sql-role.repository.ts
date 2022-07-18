@@ -59,6 +59,6 @@ export class SqlRoleRepository implements IRoleRepository {
   }
 
   async save(role: Role): Promise<void> {
-    this.repository.save(role);
+    await this.repository.save(role);
   }
 }
